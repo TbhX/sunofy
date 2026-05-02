@@ -3,7 +3,13 @@ export class CookiePool {
   private currentIndex: number = 0;
 
   constructor(initialCookies: string[] = []) {
-    this.cookies = initialCookies;
+    if (initialCookies.length > 0) {
+      this.cookies = initialCookies;
+    } else if (process.env.SUNO_COOKIES) {
+      this.cookies = process.env.SUNO_COOKIES.split(',').map(c => c.trim()).filter(c => c.length > 0);
+    } else if (process.env.SUNO_COOKIE) {
+      this.cookies = [process.env.SUNO_COOKIE];
+    }
   }
 
   public addCookie(cookie: string) {

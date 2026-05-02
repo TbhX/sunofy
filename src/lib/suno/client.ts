@@ -1,5 +1,6 @@
 import { sunoApi, AudioInfo } from './SunoApi.js';
 import { CookiePool } from './cookie-pool.js';
+import { cacheAudio } from './cache.js';
 
 export class SunoWrapper {
   private cookiePool: CookiePool;
@@ -35,6 +36,20 @@ export class SunoWrapper {
   public async getAudioUrl(songId: string): Promise<string | undefined> {
     const song = await this.getSongInfo(songId);
     return song.audio_url;
+  }
+
+  /**
+   * Retrieves song information and caches the audio to R2.
+   * @param songId The ID of the song.
+   * @returns A promise that resolves to an AudioInfo object with the cached URL.
+   */
+  public async getAndCacheSong(songId: string): Promise<AudioInfo> {
+    const song = await this.getSongInfo(songId);
+    if (song.audio_url) {
+      const cachedUrl = await cacheAudio(songId, song.audio_url);
+      song.audio_url = cachedUrl;
+    }
+    return song;
   }
 
   /**

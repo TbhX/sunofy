@@ -1,1 +1,4 @@
-export default function ArtistPage({ params }: { params: { id: string } }) { return <div className='p-8'>Artist {params.id}</div> }
+export default async function ArtistPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  return <div className='p-8'>Artist {id}</div>
+}

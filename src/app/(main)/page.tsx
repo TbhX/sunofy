@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { usePlayerStore, Song } from '@/stores/player';
 import { Play } from 'lucide-react';
 
@@ -56,7 +57,14 @@ export default function HomePage() {
                 className="flex items-center bg-card/40 hover:bg-card/80 border border-white/5 hover:border-primary/20 transition rounded overflow-hidden group cursor-pointer glass"
             >
               <div className="w-20 h-20 bg-muted flex-shrink-0 shadow-lg relative">
-                {track.coverUrl && <img src={track.coverUrl} alt={track.title} className="w-full h-full object-cover" />}
+                {track.coverUrl && (
+                  <Image 
+                    src={track.coverUrl} 
+                    alt={track.title} 
+                    fill
+                    className="object-cover" 
+                  />
+                )}
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                   <Play size={24} className="text-primary fill-primary" />
                 </div>

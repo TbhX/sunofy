@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { 
   Play, 
   Pause,
@@ -62,9 +63,14 @@ const PlayerBar = () => {
     <div className="h-24 bg-card border-t border-border px-4 flex items-center justify-between z-50 relative">
       {/* Track Info */}
       <div className="flex items-center w-[30%]">
-        <div className="w-14 h-14 bg-muted rounded flex-shrink-0 overflow-hidden shadow-solar-glow/20">
+        <div className="w-14 h-14 bg-muted rounded flex-shrink-0 overflow-hidden shadow-solar-glow/20 relative">
           {currentTrack?.coverUrl ? (
-            <img src={currentTrack.coverUrl} alt={currentTrack.title} className="w-full h-full object-cover" />
+            <Image 
+              src={currentTrack.coverUrl} 
+              alt={currentTrack.title} 
+              fill
+              className="object-cover" 
+            />
           ) : (
             <div className="w-full h-full bg-muted" />
           )}

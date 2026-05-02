@@ -61,7 +61,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
         console.error(`Blocked audio URL from untrusted domain: ${url.hostname}`);
         return;
       }
-    } catch (e) {
+    } catch {
       console.error(`Invalid audio URL: ${track.audioUrl}`);
       return;
     }

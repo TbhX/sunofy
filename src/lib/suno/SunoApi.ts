@@ -325,7 +325,7 @@ class SunoApi {
     try {
       await page.getByLabel('Close').click({ timeout: 2000 }); // close all popups
       // await this.click(page, { x: 318, y: 13 });
-    } catch(e) {}
+    } catch {}
 
     const textarea = page.locator('.custom-textarea');
     await this.click(textarea);
@@ -769,7 +769,7 @@ class SunoApi {
     page?: string | null
   ): Promise<AudioInfo[]> {
     await this.keepAlive(false);
-    let url = new URL(`${SunoApi.BASE_URL}/api/feed/v2`);
+    const url = new URL(`${SunoApi.BASE_URL}/api/feed/v2`);
     if (songIds) {
       url.searchParams.append('ids', songIds.join(','));
     }

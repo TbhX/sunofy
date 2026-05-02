@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Home, Search, Library, PlusSquare, Heart } from 'lucide-react';
-import { cn } from '@/lib/utils';
 
 const Sidebar = () => {
   return (
@@ -10,9 +9,11 @@ const Sidebar = () => {
       <div className="px-2 mb-4">
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative w-10 h-10 overflow-hidden rounded-full shadow-solar-glow group-hover:shadow-solar-glow-lg transition-all duration-300">
-            <img 
+            <Image 
               src="/branding/logo.png" 
               alt="Sunofy Logo" 
+              width={40}
+              height={40}
               className="w-full h-full object-cover"
             />
           </div>

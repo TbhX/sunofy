@@ -1,0 +1,102 @@
+
+> sunofy@0.1.0 build
+> next build && npx @cloudflare/next-on-pages
+
+   ▲ Next.js 15.4.11
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 5.0s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/7) ...
+   Generating static pages (1/7) 
+   Generating static pages (3/7) 
+   Generating static pages (5/7) 
+ ✓ Generating static pages (7/7)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ○ /                                    2.15 kB         118 kB
+├ ○ /_not-found                            989 B         101 kB
+├ ƒ /artist/[id]                           133 B        99.9 kB
+├ ○ /library                               133 B        99.9 kB
+├ ƒ /playlist/[id]                         133 B        99.9 kB
+└ ○ /search                                133 B        99.9 kB
++ First Load JS shared by all            99.8 kB
+  ├ chunks/4bd1b696-cf72ae8a39fa05aa.js  54.1 kB
+  ├ chunks/964-9e7fd12428968086.js       43.7 kB
+  └ other shared chunks (total)          1.93 kB
+
+
+ƒ Middleware                             33.6 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+⚡️ @cloudflare/next-on-pages CLI v.1.13.16
+⚡️ Detected Package Manager: npm (11.11.0)
+⚡️ Preparing project...
+⚡️ Project is ready
+⚡️ Building project...
+▲  Vercel CLI 47.0.4
+▲  > NOTE: The Vercel CLI now collects telemetry regarding usage of the CLI.
+▲  > This information is used to shape the CLI roadmap and prioritize features.
+▲  > You can learn more, including how to opt-out if you'd not like to participate in this program, by visiting the following URL:
+▲  > https://vercel.com/docs/cli/about-telemetry
+▲  WARN! Build not running on Vercel. System environment variables will not be available.
+▲  WARNING: You should not upload the `.next` directory.
+▲  Installing dependencies...
+▲  npm warn Unknown cli config "--unsafe-perm". This will stop working in the next major version of npm.
+▲  up to date in 1s
+▲  259 packages are looking for funding
+▲  run `npm fund` for details
+▲  Detected Next.js version: 15.4.11
+▲  Running "npm run build"
+▲  > sunofy@0.1.0 build
+▲  > next build && npx @cloudflare/next-on-pages
+▲  ▲ Next.js 15.4.11
+▲  
+▲  Creating an optimized production build ...
+▲  ✓ Compiled successfully in 2000ms
+▲  Linting and checking validity of types ...
+▲  Collecting page data ...
+▲  Generating static pages (0/7) ...
+▲  Generating static pages (1/7)
+▲  Generating static pages (3/7) 
+▲    Generating static pages (5/7) 
+▲  ✓ Generating static pages (7/7)
+▲  Finalizing page optimization ...
+▲  Collecting build traces ...
+▲  
+▲  Route (app)                                 Size  First Load JS
+▲  ┌ ○ /                                    2.15 kB         118 kB
+▲  ├ ○ /_not-found                            989 B         101 kB
+▲  ├ ƒ /artist/[id]                           133 B        99.9 kB
+▲  ├ ○ /library                               133 B        99.9 kB
+▲  ├ ƒ /playlist/[id]                         133 B        99.9 kB
+▲  └ ○ /search                                133 B        99.9 kB
+▲  + First Load JS shared by all            99.8 kB
+▲  ├ chunks/4bd1b696-cf72ae8a39fa05aa.js  54.1 kB
+▲  ├ chunks/964-9e7fd12428968086.js       43.7 kB
+▲  └ other shared chunks (total)          1.93 kB
+▲  
+▲  
+▲  ƒ Middleware                             33.6 kB
+▲  ○  (Static)   prerendered as static content
+▲  ƒ  (Dynamic)  server-rendered on demand
+▲  ⚡️ @cloudflare/next-on-pages CLI v.1.13.16
+▲  ⚡️ Detected Package Manager: npm (11.11.0)
+▲  ⚡️ Preparing project...
+▲  ⚡️ Project is ready
+▲  ⚡️ Building project...
+▲  ▲  Vercel CLI 47.0.4
+▲  ▲  Error: `vercel build` must not recursively invoke itself. Check the Build Command in the Project Settings or the `build` script in `package.json`
+▲  ▲  Error: Learn More: https://vercel.link/recursive-invocation-of-commands
+▲  ⚡️ The Vercel build (`npx vercel build`) command failed. For more details see the Vercel logs above.
+▲  ⚡️ If you need help solving the issue, refer to the Vercel or Next.js documentation or their repositories.
+▲  Error: Command "npm run build" exited with 1
+
+⚡️ The Vercel build (`npx vercel build`) command failed. For more details see the Vercel logs above.
+⚡️ If you need help solving the issue, refer to the Vercel or Next.js documentation or their repositories.
+

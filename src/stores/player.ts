@@ -3,13 +3,15 @@ import { Howl } from 'howler';
 
 export interface Song {
   id: string;
-  suno_id: string;
+  sunoId: string;
   title: string;
   artist: string;
+  artistId?: string;
   album?: string;
-  duration: number; // in seconds
+  durationSeconds: number;
   audioUrl: string;
   coverUrl?: string;
+  liked?: boolean;
 }
 
 interface PlayerState {
@@ -33,6 +35,7 @@ interface PlayerState {
   nextTrack: () => void;
   previousTrack: () => void;
   addToQueue: (track: Song) => void;
+  toggleLike: (songId: string) => Promise<void>;
 }
 
 const ALLOWED_AUDIO_DOMAINS = [
@@ -41,7 +44,8 @@ const ALLOWED_AUDIO_DOMAINS = [
   'cdn1.suno.ai',
   'cdn2.suno.ai',
   'r2.sunofy.app',
-  'pub-34d673932e6546368d3744957e742461.r2.dev' // Mock R2 domain
+  'pub-34d673932e6546368d3744957e742461.r2.dev', // Mock R2 domain
+  'suno.com'
 ];
 
 export const usePlayerStore = create<PlayerState>((set, get) => ({
@@ -93,7 +97,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
       currentTrack: track, 
       howl: newHowl,
       progress: 0,
-      duration: track.duration || 0,
+      duration: track.durationSeconds || 0,
       isPlaying: true
     });
     
@@ -184,5 +188,27 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
 
   addToQueue: (track: Song) => {
     set(state => ({ queue: [...state.queue, track] }));
+  },
+
+  toggleLike: async (songId: string) => {
+    try {
+      const response = await fetch(`/api/songs/${songId}/like`, {
+        method: 'POST',
+      });
+      if (response.ok) {
+        const data = await response.json();
+        // Update current track if it's the one being liked
+        const { currentTrack, queue } = get();
+        if (currentTrack?.id === songId) {
+          set({ currentTrack: { ...currentTrack, liked: data.liked } });
+        }
+        // Update queue
+        set({
+          queue: queue.map(s => s.id === songId ? { ...s, liked: data.liked } : s)
+        });
+      }
+    } catch (error) {
+      console.error('Failed to toggle like:', error);
+    }
   }
 }));

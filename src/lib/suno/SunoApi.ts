@@ -784,6 +784,10 @@ class SunoApi {
 
     const audios = response.data.clips;
 
+    return this.mapClips(audios);
+  }
+
+  private mapClips(audios: any[]): AudioInfo[] {
     return audios.map((audio: any) => ({
       id: audio.id,
       title: audio.title,
@@ -803,6 +807,32 @@ class SunoApi {
       duration: audio.metadata.duration,
       error_message: audio.metadata.error_message
     }));
+  }
+
+  /**
+   * Search for songs.
+   * @param query The search query.
+   * @param page The page number.
+   * @returns A promise that resolves to an array of AudioInfo objects.
+   */
+  public async search(
+    query: string,
+    page?: string | null
+  ): Promise<AudioInfo[]> {
+    await this.keepAlive(false);
+    const url = new URL(`${SunoApi.BASE_URL}/api/feed/v2`);
+    url.searchParams.append('is_public', 'true');
+    url.searchParams.append('term', query);
+    if (page) {
+      url.searchParams.append('page', page);
+    }
+    logger.info('Search audio: ' + url.href);
+    const response = await this.client.get(url.href, {
+      timeout: 10000
+    });
+
+    const audios = response.data.clips;
+    return this.mapClips(audios);
   }
 
   /**

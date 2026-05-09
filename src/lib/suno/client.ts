@@ -74,4 +74,16 @@ export class SunoWrapper {
     const api = await sunoApi(cookie);
     return await api.generate(prompt, makeInstrumental);
   }
+
+  /**
+   * Search for songs.
+   * @param query The search query.
+   * @param page The page number.
+   * @returns A promise that resolves to an array of AudioInfo objects.
+   */
+  public async search(query: string, page?: string | null): Promise<AudioInfo[]> {
+    const cookie = this.cookiePool.getCookie();
+    const api = await sunoApi(cookie);
+    return await api.search(query, page);
+  }
 }

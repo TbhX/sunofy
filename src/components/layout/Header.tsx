@@ -1,15 +1,26 @@
+'use client';
+
 import React from 'react';
 import { ChevronLeft, ChevronRight, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
+  const router = useRouter();
+
   return (
     <header className="h-16 bg-background/40 backdrop-blur-md flex items-center justify-between px-8 sticky top-0 z-10 border-b border-white/5">
       <div className="flex items-center space-x-4">
-        <button className="bg-background/80 rounded-full p-1 text-muted-foreground hover:text-foreground transition border border-border">
+        <button 
+          onClick={() => router.back()}
+          className="bg-background/80 rounded-full p-1 text-muted-foreground hover:text-foreground transition border border-border"
+        >
           <ChevronLeft size={24} />
         </button>
-        <button className="bg-background/80 rounded-full p-1 text-muted-foreground hover:text-foreground transition border border-border">
+        <button 
+          onClick={() => router.forward()}
+          className="bg-background/80 rounded-full p-1 text-muted-foreground hover:text-foreground transition border border-border"
+        >
           <ChevronRight size={24} />
         </button>
       </div>

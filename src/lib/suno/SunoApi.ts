@@ -36,8 +36,12 @@ export interface AudioInfo {
   type?: string;
   tags?: string; // Genre of music.
   negative_tags?: string; // Negative tags of music.
-  duration?: string; // Duration of the audio
+  duration?: number; // Duration of the audio in seconds
   error_message?: string; // Error message if any
+  user_id?: string;
+  user_handle?: string;
+  user_display_name?: string;
+  user_image_url?: string;
 }
 
 interface PersonaResponse {
@@ -804,8 +808,12 @@ class SunoApi {
       prompt: audio.metadata.prompt,
       type: audio.metadata.type,
       tags: audio.metadata.tags,
-      duration: audio.metadata.duration,
-      error_message: audio.metadata.error_message
+      duration: audio.metadata.duration ? Number(audio.metadata.duration) : undefined,
+      error_message: audio.metadata.error_message,
+      user_id: audio.user_id,
+      user_handle: audio.handle,
+      user_display_name: audio.display_name,
+      user_image_url: audio.avatar_image_url
     }));
   }
 

@@ -13,7 +13,7 @@ set -e
 
 # Configuration
 PROJECT_NAME="sunofy"
-BUILD_OUTPUT_DIR=".next"
+BUILD_OUTPUT_DIR=".vercel/output/static"
 
 # Validate environment variables
 if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
@@ -23,8 +23,8 @@ fi
 
 # Ensure build exists
 if [ ! -d "$BUILD_OUTPUT_DIR" ]; then
-    echo "Build directory $BUILD_OUTPUT_DIR does not exist. Running build..."
-    npm run build
+    echo "Build directory $BUILD_OUTPUT_DIR does not exist. Running pages:build..."
+    npm run pages:build
 fi
 
 # Clear webpack cache to prevent file size issues (25MB limit on Cloudflare Pages)

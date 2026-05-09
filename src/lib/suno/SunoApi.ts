@@ -4,7 +4,7 @@ import pino from 'pino';
 import yn from 'yn';
 import { isPage, sleep, waitForRequests } from './utils.js';
 import * as cookie from 'cookie';
-import { randomUUID } from 'node:crypto';
+import { randomUUID, createHash } from 'node:crypto';
 import { Solver } from '@2captcha/captcha-solver';
 // @ts-ignore
 import { paramsCoordinates } from '@2captcha/captcha-solver/dist/structs/2captcha';
@@ -858,14 +858,15 @@ export const sunoApi = async (cookie?: string) => {
   }
 
   // Check if the instance for this cookie already exists in the cache
-  const cachedInstance = cache.get(resolvedCookie);
+  const cookieHash = createHash('sha256').update(resolvedCookie).digest('hex');
+  const cachedInstance = cache.get(cookieHash);
   if (cachedInstance)
     return cachedInstance;
 
   // If not, create a new instance and initialize it
   const instance = await new SunoApi(resolvedCookie).init();
   // Cache the initialized instance
-  cache.set(resolvedCookie, instance);
+  cache.set(cookieHash, instance);
 
   return instance;
 };
